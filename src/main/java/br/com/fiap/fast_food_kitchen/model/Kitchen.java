@@ -45,4 +45,20 @@ public class Kitchen {
     public void setStatus(DemandStatus status) {
         this.status = status;
     }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public DemandStatus getStatus() {
+        return status;
+    }
 }
