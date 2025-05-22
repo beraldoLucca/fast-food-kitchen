@@ -9,6 +9,7 @@ O projeto gerencia o fluxo da cozinha de uma lanchonete.
 - [Uso](#uso)
 - [Endpoints de Testes](#endpoints-de-testes)
 - [Autores e Reconhecimentos](#autores-e-reconhecimentos)
+- [Evidência da cobertura](#evidencia-da-cobertura)
 
 ## Descrição
 
@@ -69,6 +70,10 @@ Aqui estão os endpoints da API que você pode usar para testar as funcionalidad
     [{"orderId": 1L,
     "products": [{ "name": "batata" }],
     "status": "FINALIZADO"]
+
+## Evidência da cobertura
+![Cobertura](images/fast-food-kitchen-sonar.png)
+
 
 ## Autores e Reconhecimentos
 
