@@ -19,8 +19,9 @@ public class KitchenController {
     }
 
     @PostMapping("/demand")
-    public void sendDemand(@RequestBody DemandKitchenRequest request) {
+    public ResponseEntity<String> sendDemand(@RequestBody DemandKitchenRequest request) {
         kitchenUsecase.saveDemand(request);
+        return ResponseEntity.ok("Pedido recebido pela cozinha!");
     }
 
     @GetMapping("/demands")
