@@ -8,11 +8,13 @@ import br.com.fiap.fast_food_kitchen.model.Product;
 import br.com.fiap.fast_food_kitchen.repository.KitchenRepository;
 import br.com.fiap.fast_food_kitchen.repository.ProductRepository;
 import br.com.fiap.fast_food_kitchen.usecase.impl.KitchenUsecaseImpl;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,6 +74,31 @@ class KitchenUsecaseImplTest {
 
         verify(productRepository).findById("Cheeseburger");
         verify(kitchenRepository).save(any(Kitchen.class));
+    }
+
+    @Test
+    void shouldUpdateDemandStatus(){
+        Kitchen kitchen = new Kitchen();
+        List<Kitchen> kitchenList = List.of(kitchen);
+        when(kitchenRepository.findKitchenInPreparation()).thenReturn(kitchenList);
+
+        kitchenUsecaseImpl.updateDemandStatus();
+        verify(kitchenRepository).save(kitchen);
+    }
+
+    @Test
+    void shouldGetReadyDemands(){
+        Product product = new Product();
+        product.setName("Cheeseburger");
+        Kitchen kitchen = new Kitchen();
+        kitchen.setOrderId(1L);
+        kitchen.setProducts(List.of(product));
+        kitchen.setStatus(DemandStatus.EM_PREPARACAO);
+        List<Kitchen> kitchenList = List.of(kitchen);
+        when(kitchenRepository.findReadyKitchenDemands()).thenReturn(kitchenList);
+
+        var demands = kitchenUsecaseImpl.getReadyDemands();
+        Assertions.assertEquals(1, demands.size());
     }
 
 }

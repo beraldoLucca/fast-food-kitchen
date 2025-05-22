@@ -11,7 +11,6 @@ import br.com.fiap.fast_food_kitchen.repository.ProductRepository;
 import br.com.fiap.fast_food_kitchen.usecase.IKitchenUsecase;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.juli.logging.Log;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -56,9 +55,7 @@ public class KitchenUsecaseImpl implements IKitchenUsecase {
     @Override
     @Scheduled(cron = "0 */2 * * * *")
     public void updateDemandStatus() {
-        System.out.println("Executing scheduled task");
         var kitchenDemands = kitchenRepository.findKitchenInPreparation();
-        System.out.println(kitchenDemands);
         kitchenDemands.forEach(kitchen -> {
             kitchen.setStatus(DemandStatus.FINALIZADO);
             kitchenRepository.save(kitchen);
